@@ -11,4 +11,3 @@ WINDOW_HEIGHT = 641
 title = "8 puzzle"
 tilesize = 128
 gamesize = 3
-
