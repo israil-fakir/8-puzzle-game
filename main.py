@@ -49,8 +49,18 @@ class Game:
     def update(self):
         pass
 
+    def draw_grid(self):
+        for row in range(-1, gamesize*tilesize, tilesize):
+            pygame.draw.line(self.screen, blue, (row,0), (row, gamesize*tilesize))
+
+        for col in range(-1, gamesize*tilesize, tilesize):
+            pygame.draw.line(self.screen,blue, (0, col), (gamesize*tilesize, col))
+
+
     def draw(self):
-        pass
+        self.screen.fill(bgcolour)
+        self.draw_grid()
+        pygame.display.flip()
 
     def events(self):
         for event in pygame.event.get():
