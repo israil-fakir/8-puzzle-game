@@ -41,7 +41,7 @@ class tile(pygame.sprite.Sprite):
      def left(self):
           return self.rect.x - tilesize >= 0
 
-     def top(self):
+     def up(self):
           return self.rect.y - tilesize >= 0
 
      def dwon(self):
