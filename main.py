@@ -1,7 +1,7 @@
 import pygame
 import random
 import time
-from behave import *
+from sprite import *
 from setting import *
 
 
@@ -11,32 +11,44 @@ class Game:
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption(title)
         self.clock = pygame.time.Clock()
-    #     self.running = True
-    #     self.board = Board(gamesize, tilesize, bgcolour)
-    #     self.sprites = pygame.sprite.Group()
-    #     self.sprites.add(self.board)
 
-    # def run(self):
-    #     while self.running:
-    #         for event in pygame.event.get():
-    #             if event.type == pygame.QUIT:
-    #                 self.running = False
-    #             elif event.type == pygame.KEYDOWN:
-    #                 if event.key == pygame.K_ESCAPE:
-    #                     self.running = False
-    #                 elif event.key == pygame.K_SPACE:
-    #                     self.board.shuffle()
 
-    #         self.screen.fill(bgcolour)
-    #         self.sprites.update()
-    #         self.sprites.draw(self.screen)
-    #         pygame.display.flip()
-    #         self.clock.tick(FPS)
+    def create_game(self):
+        grid = []
+        number = 1
+        for x in range(gamesize):
+            grid.append([])
+            for y in range(gamesize):
+                grid[x].append(number) 
+                number += 1
 
-    #     pygame.quit()
+        grid[-1][-1] = 0
+        return grid
+                
+
+    def draw_tiles(self):
+        self.tiles = []
+        for row, x in enumerate(self.tiles_grid):
+            self.tiles.append([])
+            for col, tile_val in enumerate(x):
+                if tile_val != 0:  
+                    self.tiles[row].append(tile(self, col,row, str(tile_val)))
+                else:
+                    self.tiles[row].append(tile(self, col,row, "empty"))
+                    
+                
+        # [
+        #     [1,2,3],
+        #     [4,5,6],
+        #     [7,8,0]
+        # ]
+
 
     def new(self):
-        pass
+        self.all_sprites = pygame.sprite.Group()
+        self.tiles_grid = self.create_game()
+        self.tiles_grid_completed = self.create_game()
+        self.draw_tiles()
 
     def run(self):
         self.playing = True
@@ -47,7 +59,7 @@ class Game:
             self.draw()
 
     def update(self):
-        pass
+        self.all_sprites.update()
 
     def draw_grid(self):
         for row in range(-1, gamesize*tilesize, tilesize):
@@ -59,7 +71,9 @@ class Game:
 
     def draw(self):
         self.screen.fill(bgcolour)
+        self.all_sprites.draw(self.screen)
         self.draw_grid()
+        
         pygame.display.flip()
 
     def events(self):
@@ -67,6 +81,22 @@ class Game:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit(0)
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                for row, tiles in enumerate(self.tiles):
+                    for col, tile in enumerate(tiles):
+                        if tile.click(mouse_x, mouse_y):
+                            if tile.right() and self.tiles_grid[row][col+1] == 0:
+                                self.tiles_grid[row][col], self.tiles_grid[row][col+1] =   self.tiles_grid[row][col+1], self.tiles_grid[row][col]
+
+                            if tile.left() and self.tiles_grid[row][col-1] == 0:
+                                self.tiles_grid[row][col], self.tiles_grid[row][col-1] =   self.tiles_grid[row][col-1], self.tiles_grid[row][col]
+
+                            self.draw_tiles()
+                                
+                     
+
 
 game = Game()
 while True:
