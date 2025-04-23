@@ -11,6 +11,9 @@ class Game:
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption(title)
         self.clock = pygame.time.Clock()
+        self.random_time = 0
+        self.start_random = False
+        
 
 
     def create_game(self):
@@ -48,7 +51,12 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.tiles_grid = self.create_game()
         self.tiles_grid_completed = self.create_game()
+        self.button_list = []
+        self.button_list.append(button(700, 100, 200, 50, "Random", white, black))
+        self.button_list.append(button(700, 180, 200, 50, "Reset", white, black))
         self.draw_tiles()
+        # self.test = uielement(1000,450,"test")
+        # self.button = button(400,400, 200, 100, "test", white, black)
 
     def run(self):
         self.playing = True
@@ -73,7 +81,11 @@ class Game:
         self.screen.fill(bgcolour)
         self.all_sprites.draw(self.screen)
         self.draw_grid()
-        
+        for button in self.button_list:
+            button.draw(self.screen)
+
+        # self.test.draw(self.screen)
+        # self.button.draw(self.screen)
         pygame.display.flip()
 
     def events(self):
@@ -100,7 +112,16 @@ class Game:
                                 self.tiles_grid[row][col], self.tiles_grid[row + 1][col] =   self.tiles_grid[row + 1][col], self.tiles_grid[row][col]
                             self.draw_tiles()
                                 
-                     
+                for button in self.button_list:
+                    if button.click(mouse_x, mouse_y):
+                        if button.text == "Random":
+                            self.random_time = 0
+                            self.start_random = True
+
+                        if button.text == "Reset":
+                            self.new()
+
+
 
 
 game = Game()
