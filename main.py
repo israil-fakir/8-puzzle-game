@@ -13,6 +13,12 @@ class Game:
         self.clock = pygame.time.Clock()
         self.random_time = 0
         self.start_random = False
+        self.previous_move = ""
+        self.start_game = False
+        self.start_timer = 0
+        self.play_current_time = 0
+        
+
         
 
 
@@ -27,6 +33,52 @@ class Game:
 
         grid[-1][-1] = 0
         return grid
+    
+    def random(self):
+        possible_move = []
+        for row, tiles in enumerate(self.tiles):
+            for col, tile in enumerate(tiles):
+                if tile.text == "empty":                                                                     
+                    if tile.right():
+                        possible_move.append("right")
+                    if tile.left():
+                        possible_move.append("left")
+                    if tile.up():
+                        possible_move.append("up")
+                    if tile.dwon():
+                        possible_move.append("down")
+                    break    
+            if len(possible_move) > 0:
+                break
+        
+        if self.previous_move == "right":
+            possible_move.remove("left") if "left" in possible_move else possible_move
+        elif self.previous_move == "left":
+            possible_move.remove("right") if "right" in possible_move else possible_move
+        elif self.previous_move == "up":
+            possible_move.remove("down") if "down" in possible_move else possible_move
+        elif self.previous_move == "down":
+            possible_move.remove("up") if "up" in possible_move else possible_move
+
+        choice = random.choice(possible_move)
+        self.previous_move = choice
+
+        choice = random.choice(possible_move)
+        if choice == "right":
+            self.tiles_grid[row][col], self.tiles_grid[row][col+1] =  self.tiles_grid[row][col+1], self.tiles_grid[row][col]
+        
+        elif choice == "left":
+             self.tiles_grid[row][col], self.tiles_grid[row][col-1] =   self.tiles_grid[row][col-1], self.tiles_grid[row][col]
+
+        elif choice == "up":
+            self.tiles_grid[row][col], self.tiles_grid[row - 1][col] =   self.tiles_grid[row - 1][col], self.tiles_grid[row][col]
+        
+        elif choice == "down":
+             self.tiles_grid[row][col], self.tiles_grid[row + 1][col] =   self.tiles_grid[row + 1][col], self.tiles_grid[row][col]           
+
+
+
+
                 
 
     def draw_tiles(self):
@@ -68,6 +120,14 @@ class Game:
 
     def update(self):
         self.all_sprites.update()
+        if self.start_random:
+            self.random()
+            self.draw_tiles()
+            self.random_time += 1
+            if self.random_time >= 120:
+                self.start_random = False
+               
+
 
     def draw_grid(self):
         for row in range(-1, gamesize*tilesize, tilesize):
