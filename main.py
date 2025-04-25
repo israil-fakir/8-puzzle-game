@@ -15,8 +15,9 @@ class Game:
         self.start_random = False
         self.previous_move = ""
         self.start_game = False
-        self.start_timer = 0
+        self.start_timer = False
         self.play_current_time = 0
+        self.win = 0
         
 
         
@@ -103,6 +104,11 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.tiles_grid = self.create_game()
         self.tiles_grid_completed = self.create_game()
+        self.elapesd_time = 0
+        self.start_timer = False
+        self.start_game = False
+        self.win = False
+
         self.button_list = []
         self.button_list.append(button(700, 100, 200, 50, "Random", white, black))
         self.button_list.append(button(700, 180, 200, 50, "Reset", white, black))
@@ -119,13 +125,27 @@ class Game:
             self.draw()
 
     def update(self):
+        
+        if self.start_game:
+            if self.tiles_grid == self.tiles_grid_completed and not self.win:
+                self.start_game = False
+                self.win = True
+
+            if self.start_timer:
+                self.timer = time.time()
+                self.start_timer = False
+            self.elapesd_time = time.time() - self.timer
+               
         self.all_sprites.update()
+
         if self.start_random:
             self.random()
             self.draw_tiles()
             self.random_time += 1
-            if self.random_time >= 120:
+            if self.random_time >= 60:
                 self.start_random = False
+                self.start_game = True
+                self.start_timer = True
                
 
 
@@ -146,6 +166,9 @@ class Game:
 
         # self.test.draw(self.screen)
         # self.button.draw(self.screen)
+        uielement(825,35,"%0.3f" % self.elapesd_time).draw(self.screen)
+        if self.win:
+            uielement(500, 0, "You win").draw(self.screen)
         pygame.display.flip()
 
     def events(self):
