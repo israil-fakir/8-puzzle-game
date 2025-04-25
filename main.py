@@ -121,8 +121,8 @@ class Game:
         self.win = False
 
         self.button_list = []
-        self.button_list.append(button(700, 100, 200, 50, "Random", white, black))
-        self.button_list.append(button(700, 180, 200, 50, "Reset", white, black))
+        self.button_list.append(button(800, 200, 200, 50, "Random", white, black))
+        self.button_list.append(button(800, 280, 200, 50, "Reset", white, black))
         self.draw_tiles()
         # self.test = uielement(1000,450,"test")
         # self.button = button(400,400, 200, 100, "test", white, black)
@@ -185,10 +185,10 @@ class Game:
 
         # self.test.draw(self.screen)
         # self.button.draw(self.screen)
-        uielement(400, 0, "High score: %0.3f" % (self.high_score if self.high_score > 0 else 0)).draw(self.screen)
-        uielement(825,35,"%0.3f" % self.elapesd_time).draw(self.screen)
+        uielement(600, 0, "High score: %0.3f" % (self.high_score if self.high_score > 0 else 0)).draw(self.screen)
+        uielement(825,70,"%0.3f" % self.elapesd_time).draw(self.screen)
         if self.win:
-            uielement(500, 0, "You win").draw(self.screen)
+            uielement(500, 70, "You win at:").draw(self.screen)
         pygame.display.flip()
 
     def events(self):
