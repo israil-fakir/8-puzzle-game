@@ -18,7 +18,18 @@ class Game:
         self.start_timer = False
         self.play_current_time = 0
         self.win = 0
-        
+        self.high_score = float(self.high_score()[0])
+
+    
+    def high_score(self):
+        with open("highscore.txt", "r") as file:
+            score = file.read().splitlines()
+        return score
+
+
+    def save_high_score(self):
+        with open("highscore.txt", "w") as file:
+            file.write(str("%.3f" % self.high_score))
 
         
 
@@ -130,6 +141,14 @@ class Game:
             if self.tiles_grid == self.tiles_grid_completed and not self.win:
                 self.start_game = False
                 self.win = True
+                if self.high_score > 0:                  
+                  self.high_score = min(self.high_score, self.elapesd_time)
+
+
+                else:
+                    self.high_score =self.elapesd_time
+                self.save_high_score()
+
 
             if self.start_timer:
                 self.timer = time.time()
@@ -166,6 +185,7 @@ class Game:
 
         # self.test.draw(self.screen)
         # self.button.draw(self.screen)
+        uielement(400, 0, "High score: %0.3f" % (self.high_score if self.high_score > 0 else 0)).draw(self.screen)
         uielement(825,35,"%0.3f" % self.elapesd_time).draw(self.screen)
         if self.win:
             uielement(500, 0, "You win").draw(self.screen)
