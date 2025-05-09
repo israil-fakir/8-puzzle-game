@@ -104,9 +104,10 @@ class Game:
         self.win = False
 
         self.button_list = []
+        self.button_list.append(button(750,130,300,50,"Clean High Score",white, black))
         self.button_list.append(button(800, 200, 200, 50, "Random", white, black))
-        self.button_list.append(button(800, 280, 200, 50, "Reset", white, black))
-        self.button_list.append(button(750, 360, 300, 50, "Automated (BFS)", white, black))
+        self.button_list.append(button(800, 270, 200, 50, "Reset", white, black))
+        self.button_list.append(button(750, 340, 300, 50, "Automated (BFS)", white, black))
         self.draw_tiles()
 
     def run(self):
@@ -249,6 +250,7 @@ class Game:
                         if button.text == "Random":
                             self.random_time = 0
                             self.start_random = True
+                            self.win = False
 
                         if button.text == "Reset":
                             self.new()
@@ -257,6 +259,9 @@ class Game:
                             goal = tuple(tuple(row) for row in self.tiles_grid_completed)
                             solution_path = self.bfs(start, goal)
                             self.animate_solution(solution_path)
+                        if button.text == "Clean High Score":
+                            self.high_score = 0
+                            self.save_high_score()
 
 
 game = Game()
