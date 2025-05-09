@@ -1,6 +1,6 @@
 # 8 Puzzle Game (with BFS Solver)
 
-This is a simple **8 Puzzle Game** built with **Pygame**, including features like:
+This is a simple **8 Puzzle Game** for Artificial Intelligence Lab course built with **Pygame**, including features like:
 - Manual tile movement
 - Timer and high score tracking
 - Random shuffling
@@ -14,3 +14,13 @@ Make sure you have **Python 3.7+** installed. Then install the required librarie
 
 ```bash
 pip install pygame
+
+---
+
+##  Environment Setup
+
+### 1. Clone the repository or download the project files:
+
+```bash
+git clone https://github.com/your-username/8-puzzle-game.git
+cd 8-puzzle-game
