@@ -22,5 +22,5 @@ pip install pygame
 ### 1. Clone the repository or download the project files:
 
 ```bash
-git clone https://github.com/your-username/8-puzzle-game.git
+git clone https://github.com/israil-fakir/8-puzzle-game.git
 cd 8-puzzle-game
