@@ -165,9 +165,10 @@ class Game:
         # self.button.draw(self.screen)
 
         uielement(600, 0, "High score: %0.3f" % (self.high_score if self.high_score > 0 else 0)).draw(self.screen)
-        uielement(825, 70, "%0.3f" % self.elapesd_time).draw(self.screen)
+        uielement(925, 70, "%0.3f" % self.elapesd_time).draw(self.screen)
         if self.win:
-            uielement(500, 70, "You win at:").draw(self.screen)
+            uielement(600, 70, "You win at:").draw(self.screen)          
+            
         pygame.display.flip()
 
     def get_state_from_grid(self):
