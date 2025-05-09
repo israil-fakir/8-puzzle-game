@@ -15,5 +15,11 @@ Make sure you have **Python 3.7+** installed. Then install the required librarie
 ```bash
 pip install pygame
 
----
 
+
+# Requirements
+
+Make sure you have **Python 3.7+** installed. Then install the required libraries:
+
+```bash
+pip install pygame
