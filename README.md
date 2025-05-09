@@ -1,2 +1,16 @@
-# 8-puzzle-game
-The 8-puzzle game is automated with BFS and manually
+# 8 Puzzle Game (with BFS Solver)
+
+This is a simple **8 Puzzle Game** built with **Pygame**, including features like:
+- Manual tile movement
+- Timer and high score tracking
+- Random shuffling
+- Automated solution using Breadth-First Search (BFS)
+
+---
+
+## Requirements
+
+Make sure you have **Python 3.7+** installed. Then install the required libraries:
+
+```bash
+pip install pygame
