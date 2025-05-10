@@ -105,7 +105,7 @@ class Game:
 
         self.button_list = []
         self.button_list.append(button(750,130,300,50,"Clean High Score",white, black))
-        self.button_list.append(button(800, 200, 200, 50, "Random", white, black))
+        self.button_list.append(button(750, 200, 300, 50, "Random Generate", white, black))
         self.button_list.append(button(800, 270, 200, 50, "Reset", white, black))
         self.button_list.append(button(750, 340, 300, 50, "Automated (BFS)", white, black))
         self.draw_tiles()
@@ -248,7 +248,7 @@ class Game:
 
                 for button in self.button_list:
                     if button.click(mouse_x, mouse_y):
-                        if button.text == "Random":
+                        if button.text == "Random Generate":
                             self.random_time = 0
                             self.start_random = True
                             self.win = False
