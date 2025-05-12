@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>8 Puzzle Game - README</title>
+  <!-- <title>8 Puzzle Game - README</title> -->
 </head>
 <body>
   <h1>8 Puzzle Game</h1>
@@ -17,7 +17,7 @@
 
   
 
-  <h2>⚙️ Setup Instructions</h2>
+  <h2>Setup Instructions</h2>
 
   <h3>1. Clone or Download the Project</h3>
   <pre><code>git clone https://github.com/your-username/8-puzzle-game.git
