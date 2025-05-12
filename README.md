@@ -10,7 +10,7 @@
 <ol>
 <li>Manual tile movement</li>
 <li>Timer and high score tracking</li>
-<li>Random organaization the tils</li>
+<li>Random organaization the tiles</li>
 <li>Automated solution using Breadth-First Search (BFS)</li>
 </ol>
 </p>
