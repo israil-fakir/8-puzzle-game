@@ -34,7 +34,7 @@ cd 8-puzzle-game</code></pre>
 
   <h2>How to Play</h2>
   <ul>
-    <li>Use the mouse to move the tils.
+    <li>Use the mouse to move the tiles.
   </ul>
 
   <h2>Features</h2>
